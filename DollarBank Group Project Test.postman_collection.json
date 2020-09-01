@@ -1,0 +1,208 @@
+{
+	"variables": [],
+	"info": {
+		"name": "DollarBank Group Project Test",
+		"_postman_id": "79d8b278-f154-8959-3608-0d593e8b7d99",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/user/drewski/test123",
+			"request": {
+				"url": "localhost:8080/user/drewski/test123",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/user/create/500",
+			"request": {
+				"url": "localhost:8080/user/create/500",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 0,\n\t\"firstName\": \"Andrew\",\n\t\"lastName\": \"Stich\",\n\t\"userName\": \"drewski\",\n\t\"password\": \"test123\",\n\t\"email\": \"test@123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/user/update",
+			"request": {
+				"url": "localhost:8080/user/update",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"firstName\": \"Andrew\",\n    \"lastName\": \"Stich\",\n    \"userName\": \"drewski\",\n    \"password\": \"test123\",\n    \"email\": \"newEmail\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/account/all/1",
+			"request": {
+				"url": "localhost:8080/account/all/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/account/1",
+			"request": {
+				"url": "localhost:8080/account/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/account/update",
+			"request": {
+				"url": "localhost:8080/account/update",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"userId\": 1,\n\t\"balance\": 750\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/account/create",
+			"request": {
+				"url": "localhost:8080/account/create",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 2,\n\t\"userId\": 1,\n\t\"balance\": 1000\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/account/delete/1",
+			"request": {
+				"url": "localhost:8080/account/delete/1",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/transaction/user/1",
+			"request": {
+				"url": "localhost:8080/transaction/acct/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/transaction/user/1",
+			"request": {
+				"url": "localhost:8080/transaction/user/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/transaction/create",
+			"request": {
+				"url": "localhost:8080/transaction/create",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 2,\n\t\"type\": \"DEPOSIT\",\n\t\"userId\": 1,\n\t\"accountId\": 1,\n\t\"amount\": 250,\n\t\"startBalance\": 500,\n\t\"endBalance\": 750,\n\t\"timeStamp\": null\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/transaction/update",
+			"request": {
+				"url": "localhost:8080/transaction/update",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 2,\n\t\"type\": \"DEPOSIT\",\n\t\"userId\": 1,\n\t\"accountId\": 1,\n\t\"amount\": 250,\n\t\"startBalance\": 500,\n\t\"endBalance\": 750,\n\t\"timeStamp\": \"Sept 1, 2020\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/transaction/delete/2",
+			"request": {
+				"url": "localhost:8080/transaction/delete/2",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
