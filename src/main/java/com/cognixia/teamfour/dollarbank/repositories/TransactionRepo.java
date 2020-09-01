@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.cognixia.teamfour.dollarbank.models.Transaction;
 
 @Repository
-public interface TransactioRepo extends CrudRepository<Transaction, Integer>{
+public interface TransactionRepo extends CrudRepository<Transaction, Integer>{
 
 	@Query(value = "select * from transaction where customer_id = ?", nativeQuery = true)
 	public List<Transaction> getCustomerTransactions(int customerId);
