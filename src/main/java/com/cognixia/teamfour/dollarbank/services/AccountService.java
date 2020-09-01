@@ -15,19 +15,23 @@ public class AccountService {
 	@Autowired
 	AccountRepo accountRepo;
 	
-	public List<Account> getCustomerAccounts(int customerId) {
-		return accountRepo.getCustomerAccounts(customerId);
+	public Account getAccountById(int id) {
+		return accountRepo.getAccountById(id);
 	}
 	
-	public void createAccount(Account acct) {
+	public List<Account> getUserAccounts(int userId) {
+		return accountRepo.getUserAccounts(userId);
+	}
+	
+	public void create(Account acct) {
 		accountRepo.save(acct);
 	}
 	
-	public void updateAccount(Account acct) {
+	public void update(Account acct) {
 		accountRepo.save(acct);
 	}
 	
-	public void deleteAccount(Account acct) {
-		accountRepo.delete(acct);
+	public void delete(int id) {
+		accountRepo.deleteById(id);
 	}
 }

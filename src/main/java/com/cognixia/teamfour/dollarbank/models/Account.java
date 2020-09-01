@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "accounts", catalog = "dollarbank")
+@Table(name = "accounts")
 public class Account {
 
 	@NotNull
@@ -20,8 +20,8 @@ public class Account {
 	private int id;
 
 	@NotNull
-	@Column(name = "customer_id")
-	private int customerId;
+	@Column(name = "user_id")
+	private int userId;
 
 	@NotNull
 	@Column(name = "balance")
@@ -31,10 +31,10 @@ public class Account {
 
 	}
 
-	public Account(int id, int customerId, float balance) {
+	public Account(int id, int userId, float balance) {
 		super();
 		this.id = id;
-		this.customerId = customerId;
+		this.userId = userId;
 		this.balance = balance;
 	}
 
@@ -46,12 +46,12 @@ public class Account {
 		this.id = id;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public float getBalance() {
@@ -64,7 +64,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", customerId=" + customerId + ", balance=" + balance + "]";
+		return "Account [id=" + id + ", userId=" + userId + ", balance=" + balance + "]";
 	}
 
 }

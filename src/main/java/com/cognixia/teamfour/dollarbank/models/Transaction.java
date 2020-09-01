@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "transactions", catalog = "dollarbank")
+@Table(name = "transactions")
 public class Transaction {
 
 	@NotNull
@@ -27,8 +27,8 @@ public class Transaction {
 	private String type;
 
 	@NotNull
-	@Column(name = "customer_id")
-	private int customerId;
+	@Column(name = "user_id")
+	private int userId;
 
 	@NotNull
 	@Column(name = "account_id")
@@ -54,13 +54,13 @@ public class Transaction {
 
 	}
 
-	public Transaction(int id, String type, int customerId, int accountId, float amount, float startBalance,
+	public Transaction(int id, String type, int userId, int accountId, float amount, float startBalance,
 			float endBalance) {
 		super();
 		SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 		this.id = id;
 		this.type = type;
-		this.customerId = customerId;
+		this.userId = userId;
 		this.accountId = accountId;
 		this.amount = amount;
 		this.startBalance = startBalance;
@@ -85,12 +85,12 @@ public class Transaction {
 		this.type = type;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public int getAccountId() {
@@ -135,7 +135,7 @@ public class Transaction {
 
 	@Override
 	public String toString() {
-		return "Transaction [id=" + id + ", type=" + type + ", customerId=" + customerId + ", accountId=" + accountId
+		return "Transaction [id=" + id + ", type=" + type + ", userId=" + userId + ", accountId=" + accountId
 				+ ", amount=" + amount + ", startBalance=" + startBalance + ", endBalance=" + endBalance
 				+ ", timeStamp=" + timeStamp + "]";
 	}

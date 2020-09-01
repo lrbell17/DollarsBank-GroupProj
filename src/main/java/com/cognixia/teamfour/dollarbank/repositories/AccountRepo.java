@@ -11,6 +11,12 @@ import com.cognixia.teamfour.dollarbank.models.Account;
 @Repository
 public interface AccountRepo extends CrudRepository<Account, Integer> {
 
-	@Query(value = "select * from account where customer_id = ?", nativeQuery = true)
-	public List<Account> getCustomerAccounts(int id);
+	@Query(value = "select * from accounts where account_id = ?", nativeQuery = true)
+	public Account getAccountById(int id);
+	
+	@Query(value = "select * from accounts where user_id = ?", nativeQuery = true)
+	public List<Account> getUserAccounts(int id);
+	
+	@Query(value = "delete from accounts where account_id = ?", nativeQuery = true)
+	public void deleteById(int id);
 }

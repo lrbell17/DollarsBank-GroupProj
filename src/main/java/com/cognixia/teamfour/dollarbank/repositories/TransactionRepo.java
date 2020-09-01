@@ -11,9 +11,12 @@ import com.cognixia.teamfour.dollarbank.models.Transaction;
 @Repository
 public interface TransactionRepo extends CrudRepository<Transaction, Integer>{
 
-	@Query(value = "select * from transaction where customer_id = ?", nativeQuery = true)
-	public List<Transaction> getCustomerTransactions(int customerId);
+	@Query(value = "select * from transactions where user_id = ?", nativeQuery = true)
+	public List<Transaction> getUserTransactions(int userId);
 	
-	@Query(value = "select * from transaction where account_id = ?", nativeQuery = true)
+	@Query(value = "select * from transactions where account_id = ?", nativeQuery = true)
 	public List<Transaction> getAccountTransactions(int accountId);
+	
+	@Query(value = "delete from transactions where transaction_id = ?", nativeQuery = true)
+	public void deleteById(int id);
 }

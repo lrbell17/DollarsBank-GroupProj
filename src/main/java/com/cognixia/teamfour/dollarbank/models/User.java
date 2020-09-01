@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "users", catalog = "dollarbank")
+@Table(name = "users")
 public class User {
 
 	@NotNull

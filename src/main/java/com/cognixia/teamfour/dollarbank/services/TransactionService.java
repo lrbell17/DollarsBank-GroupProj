@@ -15,8 +15,8 @@ public class TransactionService {
 	@Autowired
 	TransactionRepo transactionRepo;
 	
-	public List<Transaction> getTransactionByCustomerId(int id) {
-		return transactionRepo.getCustomerTransactions(id);
+	public List<Transaction> getTransactionByUserId(int id) {
+		return transactionRepo.getUserTransactions(id);
 	}
 	
 	public List<Transaction> getTransactionByAccountId(int id) {
@@ -31,7 +31,7 @@ public class TransactionService {
 		transactionRepo.save(transaction);
 	}
 	
-	public void delete(Transaction transaction) {
-		transactionRepo.delete(transaction);
+	public void delete(int id) {
+		transactionRepo.deleteById(id);
 	}
 }
