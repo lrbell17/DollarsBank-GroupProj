@@ -23,6 +23,10 @@ public class Transaction {
 	private int id;
 
 	@NotNull
+	@Column(name = "type")
+	private String type;
+
+	@NotNull
 	@Column(name = "customer_id")
 	private int customerId;
 
@@ -50,10 +54,12 @@ public class Transaction {
 
 	}
 
-	public Transaction(int id, int customerId, int accountId, float amount, float startBalance, float endBalance) {
+	public Transaction(int id, String type, int customerId, int accountId, float amount, float startBalance,
+			float endBalance) {
 		super();
 		SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 		this.id = id;
+		this.type = type;
 		this.customerId = customerId;
 		this.accountId = accountId;
 		this.amount = amount;
@@ -69,6 +75,14 @@ public class Transaction {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public int getCustomerId() {
@@ -121,9 +135,9 @@ public class Transaction {
 
 	@Override
 	public String toString() {
-		return "Transaction [id=" + id + ", customerId=" + customerId + ", accountId=" + accountId + ", amount="
-				+ amount + ", startBalance=" + startBalance + ", endBalance=" + endBalance + ", timeStamp=" + timeStamp
-				+ "]";
+		return "Transaction [id=" + id + ", type=" + type + ", customerId=" + customerId + ", accountId=" + accountId
+				+ ", amount=" + amount + ", startBalance=" + startBalance + ", endBalance=" + endBalance
+				+ ", timeStamp=" + timeStamp + "]";
 	}
 
 }
