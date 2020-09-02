@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cognixia.teamfour.dollarbank.models.Account;
 import com.cognixia.teamfour.dollarbank.services.AccountService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/account")
 public class AccountController {
