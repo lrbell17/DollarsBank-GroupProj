@@ -1,8 +1,7 @@
 package com.cognixia.teamfour.dollarbank.controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +32,7 @@ public class UserController {
 	TransactionService ts;
 	
 	@GetMapping("/{username}/{password}")
-	public User getUser(@Valid @PathVariable String username, @Valid @PathVariable String password) {
+	public User getUser(@Validated @PathVariable String username, @Validated @PathVariable String password) {
 		User u = us.getByUserName(username);
 		if(u.getPassword().equals(password)) {
 			return u;
@@ -43,7 +42,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/create/{amount}")
-	public void createUser(@Valid @RequestBody User u, @Valid @PathVariable float amount) {
+	public void createUser(@Validated @RequestBody User u, @Validated @PathVariable float amount) {
 		us.create(u);
 		User user = us.getByUserName(u.getUserName());
 		
@@ -63,12 +62,12 @@ public class UserController {
 	}
 	
 	@PutMapping("/update")
-	public void updateUser(@Valid @RequestBody User u) {
+	public void updateUser(@Validated @RequestBody User u) {
 		us.update(u);
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public void deleteUser(@Valid @PathVariable int id) {
+	public void deleteUser(@Validated @PathVariable int id) {
 		us.delete(id);
 	}
 }
