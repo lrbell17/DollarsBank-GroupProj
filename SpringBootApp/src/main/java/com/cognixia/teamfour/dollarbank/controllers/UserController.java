@@ -18,6 +18,7 @@ import com.cognixia.teamfour.dollarbank.services.AccountService;
 import com.cognixia.teamfour.dollarbank.services.TransactionService;
 import com.cognixia.teamfour.dollarbank.services.UserService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/user")
 public class UserController {
