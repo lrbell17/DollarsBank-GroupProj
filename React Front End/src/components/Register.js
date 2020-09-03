@@ -13,7 +13,7 @@ class Register extends React.Component {
             email: "",
             pass: "",
             amount: 0,
-            errors: [],
+            error: "",
             message: ""
         }
        this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,11 +23,29 @@ class Register extends React.Component {
         
         e.preventDefault();
 
-        LoginRegistrationService.createUser(this.state.fname, this.state.lname, this.state.uname, this.state.email, 
-            this.state.pass, this.state.amount)
+        this.setState(() => ({
+            error: "",
+            success: ""
+        }));
 
-        console.log("registration sucessful");
-        this.setState.message = "Registration Sucessful!";
+
+        LoginRegistrationService.getUser(this.state.uname, this.state.pass).then((response) => {
+            
+            if (response.data.userName === undefined){
+                LoginRegistrationService.createUser(this.state.fname, this.state.lname, this.state.uname, this.state.email, 
+                    this.state.pass, this.state.amount)
+        
+                console.log("registration sucessful");
+                this.setState(() => ({success: "Registration Successful"}));
+            }
+            else {
+                console.log("Registration failed");
+                this.setState(() => ({error: "This username already exists!"}));
+            }
+
+        });
+
+ 
 
     }
 
@@ -41,17 +59,16 @@ class Register extends React.Component {
             color: 'blue'
         }
 
+
         return(
             <div>
                 <h1>Registration</h1>
 
                 {/* print success message */}
-                <p style={sucessStyle}>{this.state.message}</p>
+                <p style={sucessStyle}>{this.state.success}</p>
                     
                 {/* print error message */}
-                {this.state.errors.map(error => (
-                    <p style={errorStyle} key={error}>Error: {error}</p>
-                ))}
+                <p style={errorStyle}>{this.state.error}</p>
 
                 <form onSubmit={this.handleSubmit}>
                     

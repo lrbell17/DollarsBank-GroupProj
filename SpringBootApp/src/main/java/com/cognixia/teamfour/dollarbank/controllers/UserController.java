@@ -35,10 +35,14 @@ public class UserController {
 	
 	@GetMapping("/{username}/{password}")
 	public User getUser(@Validated @PathVariable String username, @Validated @PathVariable String password) {
-		User u = us.getByUserName(username);
-		if(u.getPassword().equals(password)) {
-			return u;
-		} else {
+		try {
+			User u = us.getByUserName(username);
+			if(u.getPassword().equals(password)) {
+				return u;
+			} else {
+				return null;
+			}
+		} catch (NullPointerException e) {
 			return null;
 		}
 	}

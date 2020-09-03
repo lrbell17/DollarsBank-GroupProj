@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* min-height: 5vh; */
+  background:  #4a7ae4;
+  color: white;
+  padding-top: 10px;
+}
+
+.nav-links{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+
+}
+
+.nav-items {
+  border: none;
+  padding: 10px 30px 10px 30px;
+  box-shadow: none;
+  background-image: none;
+  font-weight: bold;
+}

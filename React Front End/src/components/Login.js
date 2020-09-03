@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import LoginRegistrationService from '../services/LoginRegesterService.js';
 
 class Login extends React.Component {
@@ -10,8 +10,9 @@ class Login extends React.Component {
             activeUser: {},
             uname: "",
             pass: "",
-            errors: [],
-            message: "",
+            error: "",
+            success: "",
+            isLoggedIn: false
         }
        this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -20,11 +21,11 @@ class Login extends React.Component {
         e.preventDefault();
 
         this.setState(() => ({
-            errors: [],
-            message: ""
-        }))
+            error: "",
+            success: ""
+        }));
 
-        let errors = this.state.errors;
+        
         let uname = this.state.uname;
         let pass = this.state.pass;
 
@@ -34,14 +35,14 @@ class Login extends React.Component {
             if (response.data.userName ===uname && response.data.password === pass){
                 this.setState(() => ({
                     activeUser: response.data,
-                    message: "Login sucessful!"
+                    success: "Login sucessful!",
+                    isLoggedIn: true
                 }));
                 console.log("login sucessful!");
             }   
             else {
                 console.log("Invalid Credentials!")
-                errors.push("Invalid Credentials!");
-                this.setState(() => ({errors: errors}));
+                this.setState(() => ({error: "Invalid Credentials!"}));
             }
         })
         .catch((error) => {
@@ -52,6 +53,18 @@ class Login extends React.Component {
 
 
     render () {
+
+        // redirect if user logs in successfully
+        const isLoggedIn = this.state.isLoggedIn;
+        if (isLoggedIn === true) {
+            return <Redirect to={{
+                pathname: "/home",
+                state: {
+                    activeUser: this.state.activeUser,
+                    isLoggedIn: this.state.isLoggedIn
+                }
+            }}  />
+        }
 
         const errorStyle = {
             color: 'red'
@@ -65,12 +78,10 @@ class Login extends React.Component {
                 <h1>Login</h1>
 
                 {/* print success message */}
-                <p style={sucessStyle}>{this.state.message}</p>
+                <p style={sucessStyle}>{this.state.success}</p>
                     
                 {/* print error message */}
-                {this.state.errors.map(error => (
-                    <p style={errorStyle} key={error}>Error: {error}
-                </p>))}
+                <p style={errorStyle} >{this.state.error} </p>
 
                 <form onSubmit={this.handleSubmit}>
 
