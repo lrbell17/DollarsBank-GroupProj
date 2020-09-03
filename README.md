@@ -10,3 +10,4 @@
 * install node modules --> npm install
 * Axios --> npm add axios
 * Router --> npm install react-router-dom
+* Bootstrap --> npm install bootstrap --save
