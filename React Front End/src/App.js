@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
-
 import Transaction from './components/Transaction.js';
 import HomePage from './components/HomePage.js'
 import Account from './components/Account.js'

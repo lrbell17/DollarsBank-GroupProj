@@ -14,19 +14,22 @@ class HomePage extends Login {
         this.state = {
             user: {},
             isLoggedIn: null,
-            userAccounts: []
+            userAccounts: [],
+            success: "",
+            error: ""
         }
 
-        this.baseState = this.state;
+        //this.baseState = this.state;
     }
 
     componentDidMount = () => {
   
         if (this.props.location.state !== undefined){
-                
+            console.log(this.props.location.state.isLoggedIn);
+            console.log(this.props.location.state.activeUser.id);
             
             const activeUser = this.props.location.state.activeUser;
-  
+
 
             this.setState(() => ({
                 user: this.props.location.state.activeUser,
@@ -34,16 +37,27 @@ class HomePage extends Login {
             }))
 
             AccountService.getUserAccounts(activeUser.id).then((response) => {
+                console.log(response.data)
                 this.setState(() => ({
                     userAccounts: response.data
                 }));
             });
         }
+        
     }
 
-    handleClose = () => {
-        this.setState(this.baseState);
-        return <Redirect to="/login"/>
+    // TODO --> 500 error
+    handleCloseAccount = (id) => {
+        AccountService.deleteAccount(id).then(() =>{
+            this.setState(() =>({
+                success: "Account closed"
+            }))
+        })
+        .catch((error) => {
+            this.setState(() =>({
+                error: "Unable to close account"
+            }))
+        });
     }
 
     //TODO
@@ -59,7 +73,15 @@ class HomePage extends Login {
         }
  
         const userAccounts = this.state.userAccounts;
-       
+
+        const errorStyle = {
+            color: 'red'
+        }
+        const sucessStyle = {
+            color: 'blue'
+        }
+
+        
         return(
 
             
@@ -69,6 +91,9 @@ class HomePage extends Login {
                 {/* <NavBar /> */}
 
                 <h2> Welcome {this.state.user.firstName} !</h2><br/><br/>
+
+                <p style={sucessStyle}>{this.state.success}</p>
+                <p style={errorStyle} >{this.state.error} </p>
 
                 <h4>Account information</h4>
 
@@ -89,12 +114,12 @@ class HomePage extends Login {
                                             <td>{account.id}</td>
                                             <td>{account.balance.toFixed(2)}</td>
                                             <td>
-                                                <button onClick={this.handleClose(account.id)}>
+                                                <button onClick={() => this.handleCloseAccount(account.id)}>
                                                     Close Account
                                                 </button>
                                             </td>
                                             <td>
-                                                <button onClick={this.handleTransactions(account.id)}>
+                                                <button onClick={() => this.handleTransactions(account.id)}>
                                                     View Transactions
                                                 </button>
                                             </td>
