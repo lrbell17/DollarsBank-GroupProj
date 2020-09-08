@@ -40,7 +40,6 @@ class HomePage extends Login {
         }
     }
 
-    //TODO
     handleClose = () => {
         this.setState(this.baseState);
         return <Redirect to="/login"/>
