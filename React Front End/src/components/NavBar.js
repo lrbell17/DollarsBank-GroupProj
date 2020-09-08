@@ -3,15 +3,16 @@ import '../App.css';
 import {Link} from 'react-router-dom';
 
 
-const NavBar = (activeUser) => {
+class NavBar extends React.Component {
   
-    
+    render(){
         const navStyle = {
             color: 'white'
         }
 
         
         return (
+            
             <nav>
                 <h3>DollarsBank App</h3>
                 <ul className="nav-links">
@@ -21,7 +22,13 @@ const NavBar = (activeUser) => {
                     <Link style={navStyle} to='/account'>
                         <li className="nav-items">Open Account</li>
                     </Link>
-                    <Link style={navStyle} to='/transaction'>
+                    <Link style={navStyle} to={{
+                        pathname: "/transaction",
+                        state: {
+                            activeUser: this.props.activeUser,
+                            isLoggedIn: this.props.isLoggedIn
+                        }
+                    }}>
                         <li className="nav-items">Make a Transaction</li>
                     </Link>
                     <Link style={navStyle} to='/update'>
@@ -33,7 +40,7 @@ const NavBar = (activeUser) => {
                 </ul>
             </nav>
         );
-    
+    }
 }
 
 export default NavBar;

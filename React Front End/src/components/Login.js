@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import LoginRegistrationService from '../services/LoginRegesterService.js';
 
+
 class Login extends React.Component {
 
     constructor(props){
@@ -14,6 +15,7 @@ class Login extends React.Component {
             success: "",
             isLoggedIn: false
         }
+
        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -38,6 +40,7 @@ class Login extends React.Component {
                     success: "Login sucessful!",
                     isLoggedIn: true
                 }));
+
                 console.log("login sucessful!");
             }   
             else {
@@ -65,6 +68,7 @@ class Login extends React.Component {
                 }
             }}  />
         }
+
 
         const errorStyle = {
             color: 'red'
@@ -108,5 +112,6 @@ class Login extends React.Component {
         )
     }
 }
+
 
 export default Login;
