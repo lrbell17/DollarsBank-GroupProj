@@ -15,6 +15,8 @@ class HomePage extends Login {
             isLoggedIn: null,
             userAccounts: []
         }
+
+        this.baseState = this.state;
     }
 
     componentDidMount = () => {
@@ -40,7 +42,8 @@ class HomePage extends Login {
 
     //TODO
     handleClose = () => {
-
+        this.setState(this.baseState);
+        return <Redirect to="/login"/>
     }
 
     //TODO
