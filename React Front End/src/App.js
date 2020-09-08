@@ -3,8 +3,9 @@ import './App.css';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
 import Transaction from './components/Transaction.js';
-import HomePage from './components/HomePage.js'
-import Account from './components/Account.js'
+import HomePage from './components/HomePage.js';
+import Account from './components/Account.js';
+import Update from './components/Update.js'
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -18,7 +19,7 @@ function App() {
             <Route path="/home" component={HomePage} />
             <Route path="/transaction" component={Transaction} />
             <Route path="/account" component={Account}/>
-
+            <Route path="/update" component={Update}/>
           </Switch>
 
       </div>
