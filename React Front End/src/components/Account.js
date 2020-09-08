@@ -9,12 +9,15 @@ class Account extends HomePage {
 
     constructor(props) {
         super(props);
-        initialDeposit = 0;
+        this.state = {
+            initialDeposit: 0
+        }
+        
     }
 
     handleSubmit = (e) => {
-        AccountService.createAccount(this.state.user.user_id, initialDeposit);
-        return <Redirect to="/HomePAge" />
+        AccountService.createAccount(this.state.user.user_id, this.state.initialDeposit);
+        return <Redirect to="/HomePage" />
     }
 
     render() {
@@ -41,3 +44,5 @@ class Account extends HomePage {
         );
     }
 }
+
+export default Account;
