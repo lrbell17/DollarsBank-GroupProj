@@ -22,6 +22,17 @@ class LoginRegistrationService {
         return axios.get(`${user_url}/${uname}/${pass}`);
     }
 
+    updateUser = (id, fname, lname, uname, eMail, pass, amount) => {
+        return axios.put(`${user_url}/update`),
+            {
+                id: id,
+                firstName: fname,
+                lastName: lname,
+                userName: uname,
+                password: pass,
+                email: eMail
+            }
+    }
 }
 
 export default new LoginRegistrationService();
