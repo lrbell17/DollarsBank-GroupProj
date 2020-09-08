@@ -12,15 +12,14 @@ class TransactionService {
         return axios.get(`${trans_url}/acct/${accountId}`);
     }
 
-    createTransaction = (type, user_id, account_id, amount, start_balance, end_balance, time_stamp) => {
+    createTransaction = (type, user_id, account_id, amount, start_balance, end_balance) => {
         return axios.post(`${trans_url}/create`, {
             type: type,
             userId: user_id,
             accountId: account_id,
             amount: amount,
             startBalance: start_balance,
-            endBalance: end_balance,
-            timeStamp: time_stamp
+            endBalance: end_balance
         });
     }
 

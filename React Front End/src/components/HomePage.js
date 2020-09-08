@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 
 
 
+
 class HomePage extends Login {
 
     constructor(props){
@@ -21,9 +22,9 @@ class HomePage extends Login {
   
         if (this.props.location.state !== undefined){
                 
- 
+            
             const activeUser = this.props.location.state.activeUser;
-
+  
 
             this.setState(() => ({
                 user: this.props.location.state.activeUser,
@@ -56,13 +57,14 @@ class HomePage extends Login {
         }
  
         const userAccounts = this.state.userAccounts;
-
+       
         return(
 
             
             <div>
 
                 <NavBar activeUser={this.state.user} isLoggedIn={this.state.isLoggedIn}/>
+                {/* <NavBar /> */}
 
                 <h2> Welcome {this.state.user.firstName} !</h2><br/><br/>
 

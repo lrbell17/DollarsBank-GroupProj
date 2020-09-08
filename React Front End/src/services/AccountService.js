@@ -20,6 +20,14 @@ class AccountService {
         })
     }
 
+    updateAccount = (account_id, user_id, balance) => {
+        return axios.put(`${account_url}/update`, {
+            id: account_id,
+            userId: user_id,
+            balance: balance
+        })
+    }
+
     deleteAccount = (account_id) => {
         return axios.delete(`${account_url}/delete/${account_id}`)
     }
