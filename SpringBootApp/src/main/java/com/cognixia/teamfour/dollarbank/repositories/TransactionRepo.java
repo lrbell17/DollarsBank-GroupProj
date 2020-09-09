@@ -2,6 +2,7 @@ package com.cognixia.teamfour.dollarbank.repositories;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ public interface TransactionRepo extends CrudRepository<Transaction, Integer>{
 	@Query(value = "select * from transactions where account_id = ?", nativeQuery = true)
 	public List<Transaction> getAccountTransactions(int accountId);
 	
+	@Modifying
 	@Query(value = "delete from transactions where transaction_id = ?", nativeQuery = true)
 	public void deleteById(int id);
 }

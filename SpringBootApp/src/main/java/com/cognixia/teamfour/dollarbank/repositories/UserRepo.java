@@ -1,5 +1,6 @@
 package com.cognixia.teamfour.dollarbank.repositories;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -18,6 +19,7 @@ public interface UserRepo extends CrudRepository<User, Integer> {
 	@Query(value = "select * from users where email = ?", nativeQuery = true)
 	public User getByEmail(String email);
 	
+	@Modifying
 	@Query(value = "delete from users where user_id = ?", nativeQuery = true)
 	public void deleteById(int id);
 }
