@@ -1,5 +1,8 @@
 package com.cognixia.teamfour.dollarbank.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,13 +60,17 @@ public class UserController {
 		a.setBalance(amount);
 		as.create(a);
 		
+		SimpleDateFormat df = new SimpleDateFormat("d/M/yyyy H:m:s aa");
+		String timeStamp = df.format(new Date());
+		
 		Transaction t = new Transaction();
 		t.setAccountId(a.getId());
 		t.setUserId(user.getId());
 		t.setAmount(amount);
 		t.setStartBalance(0);
 		t.setEndBalance(amount);
-		t.setType("DEPOSIT");
+		t.setType("Initial Deposit");
+		t.setTimeStamp(timeStamp);
 		ts.create(t);
 	}
 	
