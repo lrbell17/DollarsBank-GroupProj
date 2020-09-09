@@ -17,7 +17,7 @@ class Transaction extends React.Component {
             accountNo: 0,
             transactionType: "deposit",
             accountForTransfer: "",
-            amount: 0,
+            amount: null,
             balance: 0, 
             success: "", 
             error: ""
@@ -26,12 +26,14 @@ class Transaction extends React.Component {
     }
 
     componentDidMount = () => {
+
+        if (!this.props.location.state || this.state.isLoggedIn===false){
+            return <Redirect to="/login" />
+        }
   
         if (this.props.location.state !== undefined){
                 
- 
             const activeUser = this.props.location.state.activeUser;
-
 
             this.setState(() => ({
                 user: this.props.location.state.activeUser,
@@ -47,8 +49,15 @@ class Transaction extends React.Component {
         }
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
       
+        e.preventDefault();
+
+        this.setState(() => ({
+            error: "",
+            success:""
+        }))
+
         AccountService.getAccount(this.state.accountNo).then((response) => {
 
             // Deposit
@@ -61,7 +70,8 @@ class Transaction extends React.Component {
                 + parseFloat(this.state.amount));
 
                 this.setState(() => ({
-                    success: "Deposit successful"
+                    success: "Deposit successful",
+                    amount: null
                 }));
             }
 
@@ -70,7 +80,8 @@ class Transaction extends React.Component {
 
                 if (response.data.balance < this.state.amount){
                     this.setState(() => ({
-                        error: "Insufficient Funds"
+                        error: "Insufficient Funds", 
+                        amount: null
                     }));
                 }
                 else {
@@ -81,7 +92,8 @@ class Transaction extends React.Component {
                     - parseFloat(this.state.amount));
 
                     this.setState(() => ({
-                        success: "Withdraw successful"
+                        success: "Withdraw successful",
+                        amount: null
                     }));
                 }
             }
@@ -89,7 +101,8 @@ class Transaction extends React.Component {
             else {
                 if (response.data.balance < this.state.amount){
                     this.setState(() => ({
-                        error: "Insufficient Funds"
+                        error: "Insufficient Funds", 
+                        amount: null
                     }));
                 }
                 else {
@@ -114,13 +127,15 @@ class Transaction extends React.Component {
                             parseFloat(responseTrans.data.balance) + parseFloat(this.state.amount));
                         
                         this.setState(() => ({
-                            success: "Transfer Sucessful"
+                            success: "Transfer Sucessful",
+                            amount: null
                         }))
                     })
                     .catch((error) => {
                         console.log(error);
                         this.setState(() => ({
-                            error: "Unable to process transfer"
+                            error: "Unable to process transfer",
+                            amount: null
                         }))
                     });
                 }
@@ -128,10 +143,8 @@ class Transaction extends React.Component {
 
             
         })
+        
 
-        
-        
-        
     }
 
     render() {
@@ -141,6 +154,7 @@ class Transaction extends React.Component {
             return <Redirect to="/login" />
         }
  
+
         const userAccounts = this.state.userAccounts;
 
         const errorStyle = {
@@ -162,7 +176,7 @@ class Transaction extends React.Component {
                 <p style={sucessStyle}>{this.state.success}</p>
                 <p style={errorStyle} >{this.state.error} </p>
 
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     
                     <strong>Account No:    </strong>
                     <select value={this.state.accountNo} onChange={evt => this.setState({accountNo : evt.target.value })}>
@@ -199,7 +213,7 @@ class Transaction extends React.Component {
                     <strong>Amount: </strong><br/>
                     <input type="number" value={this.state.amount} 
                             onChange={evt => this.setState({amount : evt.target.value })} placeholder="$0.00"
-                            min="0.00" step="0.01" required
+                            min="0.01" step="0.01" required
                     /><br/>
                     
                     {
@@ -218,9 +232,9 @@ class Transaction extends React.Component {
                     
                     <br/>
 
+                    <input type="submit" />
                 </form>
-                
-                <button onClick={this.handleSubmit} >Submit </button>
+
                 
                 
             </div>

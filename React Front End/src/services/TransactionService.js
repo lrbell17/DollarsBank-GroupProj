@@ -15,10 +15,6 @@ class TransactionService {
     createTransaction = (type, user_id, account_id, amount, start_balance, end_balance) => {
 
         const date = new Date();
-        
-        console.log(date.toLocaleTimeString());
-        console.log(date.toLocaleDateString());
-        
 
         return axios.post(`${trans_url}/create`, {
             type: type,

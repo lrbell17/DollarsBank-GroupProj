@@ -68,7 +68,7 @@ class AccountTransactions extends React.Component {
                                 <tr key={index}>
                                     <td>{transaction.type}</td>
 
-                                    {parseFloat(transaction.startBalance) < parseFloat(transaction.endBalance) ?
+                                    {parseFloat(transaction.startBalance) <= parseFloat(transaction.endBalance) ?
                                         <td style={sucessStyle}>+ ${transaction.amount.toFixed(2)}</td>
                                         :
                                         <td style={errorStyle}>- ${transaction.amount.toFixed(2)}</td>
