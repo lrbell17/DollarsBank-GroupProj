@@ -1,9 +1,9 @@
 import React from 'react';
 import Login from './Login';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import AccountService from '../services/AccountService.js';
 import NavBar from './NavBar';
-
+import AccountTransactions from './AccountTransactions.js';
 
 
 
@@ -16,20 +16,17 @@ class HomePage extends Login {
             isLoggedIn: null,
             userAccounts: [],
             success: "",
-            error: ""
+            error: "",
+            accountForHist: null
         }
 
-        //this.baseState = this.state;
     }
 
     componentDidMount = () => {
   
         if (this.props.location.state !== undefined){
-            console.log(this.props.location.state.isLoggedIn);
-            console.log(this.props.location.state.activeUser.id);
             
             const activeUser = this.props.location.state.activeUser;
-
 
             this.setState(() => ({
                 user: this.props.location.state.activeUser,
@@ -37,7 +34,6 @@ class HomePage extends Login {
             }))
 
             AccountService.getUserAccounts(activeUser.id).then((response) => {
-                console.log(response.data)
                 this.setState(() => ({
                     userAccounts: response.data
                 }));
@@ -60,8 +56,12 @@ class HomePage extends Login {
         });
     }
 
-    //TODO
-    handleTransactions = () => {
+   
+    handleTransactions = (id) => {
+
+        this.setState(() => ({
+            accountForHist: id
+        }))
 
     }
 
@@ -90,7 +90,7 @@ class HomePage extends Login {
                 <NavBar activeUser={this.state.user} isLoggedIn={this.state.isLoggedIn}/>
                 {/* <NavBar /> */}
 
-                <h2> Welcome {this.state.user.firstName} !</h2><br/><br/>
+                <h2> Welcome {this.state.user.firstName} !</h2><br/>
 
                 <p style={sucessStyle}>{this.state.success}</p>
                 <p style={errorStyle} >{this.state.error} </p>
@@ -110,7 +110,7 @@ class HomePage extends Login {
                             {
                                 userAccounts.map((account, index) => (
                                     
-                                        <tr>
+                                        <tr key={index}>
                                             <td>{account.id}</td>
                                             <td>${account.balance.toFixed(2)}</td>
                                             <td>
@@ -129,6 +129,16 @@ class HomePage extends Login {
                             }
                     </tbody>
                 </table>
+
+                {this.state.accountForHist !== null ? 
+                    <div>
+                        <br/><hr/>
+                        <AccountTransactions accountNo={this.state.accountForHist}/>
+                    </div>
+                :
+                <div></div>
+                }
+                
 
             </div>
         );
