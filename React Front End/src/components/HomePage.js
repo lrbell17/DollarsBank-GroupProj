@@ -112,7 +112,7 @@ class HomePage extends Login {
                                     
                                         <tr>
                                             <td>{account.id}</td>
-                                            <td>{account.balance.toFixed(2)}</td>
+                                            <td>${account.balance.toFixed(2)}</td>
                                             <td>
                                                 <button onClick={() => this.handleCloseAccount(account.id)}>
                                                     Close Account

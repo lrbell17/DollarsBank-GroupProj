@@ -54,7 +54,7 @@ class Transaction extends React.Component {
             // Deposit
             if (this.state.transactionType === "deposit"){
                 
-                TransactionService.createTransaction("DEPOSIT", this.state.user.id, this.state.accountNo, this.state.amount,
+                TransactionService.createTransaction("Deposit", this.state.user.id, this.state.accountNo, this.state.amount,
                 response.data.balance, parseFloat(response.data.balance) + parseFloat(this.state.amount))
   
                 AccountService.updateAccount(this.state.accountNo, this.state.user.id, parseFloat(response.data.balance) 
@@ -74,7 +74,7 @@ class Transaction extends React.Component {
                     }));
                 }
                 else {
-                    TransactionService.createTransaction("WITHDRAW", this.state.user.id, this.state.accountNo, this.state.amount,
+                    TransactionService.createTransaction("Withdraw", this.state.user.id, this.state.accountNo, this.state.amount,
                     response.data.balance, parseFloat(response.data.balance) - parseFloat(this.state.amount))
  
                     AccountService.updateAccount(this.state.accountNo, this.state.user.id, parseFloat(response.data.balance) 
@@ -97,7 +97,7 @@ class Transaction extends React.Component {
                     AccountService.getAccount(this.state.accountForTransfer).then((responseTrans) => {
 
                         // Remove funds from active account
-                        TransactionService.createTransaction(`Transfer to ${this.state.accountForTransfer}`, 
+                        TransactionService.createTransaction(`Transfer to Account: ${this.state.accountForTransfer}`, 
                             this.state.user.id, this.state.accountNo, this.state.amount, response.data.balance, 
                             parseFloat(response.data.balance) - parseFloat(this.state.amount));
     
@@ -105,7 +105,7 @@ class Transaction extends React.Component {
                             parseFloat(response.data.balance) - parseFloat(this.state.amount));
 
                         // add funds to recipient
-                        TransactionService.createTransaction(`Transfer from ${this.state.accountNo}`, 
+                        TransactionService.createTransaction(`Transfer from Account: ${this.state.accountNo}`, 
                             responseTrans.data.userId, this.state.accountForTransfer, this.state.amount,
                             responseTrans.data.balance,
                             parseFloat(responseTrans.data.balance) + parseFloat(this.state.amount));
