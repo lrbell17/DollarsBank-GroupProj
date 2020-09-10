@@ -12,7 +12,7 @@ class Register extends React.Component {
             uname: "",
             email: "",
             pass: "",
-            amount: 0,
+            amount: null,
             error: "",
             message: ""
         }

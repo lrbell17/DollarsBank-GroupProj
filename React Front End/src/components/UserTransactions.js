@@ -1,5 +1,4 @@
 import React from 'react';
-import Login from './Login';
 import {Redirect, Link} from 'react-router-dom';
 import NavBar from './NavBar';
 import TransactionService from '../services/TransactionService.js';
@@ -31,8 +30,7 @@ class UserTransactions extends React.Component {
             }))
 
             TransactionService.getAllUserTransactions(activeUser.id).then((response) => {
-                
-                console.log(response.data);
+     
                 this.setState(() => ({
                     userTransactions: response.data
                 }));

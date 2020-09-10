@@ -9,7 +9,7 @@ class Account extends HomePage {
     constructor(props) {
         super(props);
         this.state = {
-            initialDeposit: 0,
+            initialDeposit: null,
             success: "",
             error: ""
         }
@@ -17,6 +17,9 @@ class Account extends HomePage {
     }
 
     handleSubmit = (e) => {
+
+        e.preventDefault();
+
         AccountService.createAccount(this.props.location.state.activeUser.id, this.state.initialDeposit).then(() => {
             this.setState(() => ({
                 success: "Account created sucessfully"
@@ -54,19 +57,21 @@ class Account extends HomePage {
                 <form onSubmit={this.handleSubmit}>
 
                         <label>Initial Deposit</label><br/>
-                        <input type="text" value={this.state.initialDeposit} 
-                            onChange={evt => this.setState({initialDeposit : evt.target.value })} placeholder="ex: 100.00"  
+                        <input type="number" value={this.state.initialDeposit} 
+                            onChange={evt => this.setState({initialDeposit : evt.target.value })} 
+                            min="0.00" step="0.01" placeholder="$0.00"  required
                         /><br/><br/>
 
+                    <input type="submit" />
                 </form>
 
-                <button onClick={() => {this.handleSubmit()}}>Submit</button>
+                
 
                 <br></br>
                 <Link  to='/home'>
                         Return  
                 </Link>
-                
+
             </div>
         );
     }

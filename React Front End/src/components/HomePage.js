@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 import AccountService from '../services/AccountService.js';
 import NavBar from './NavBar';
 import AccountTransactions from './AccountTransactions.js';
+import TransactionService from '../services/TransactionService';
 
 
 
@@ -42,12 +43,33 @@ class HomePage extends Login {
         
     }
 
-    // TODO --> 500 error
+    
     handleCloseAccount = (id) => {
+        // delete account
         AccountService.deleteAccount(id).then(() =>{
-            this.setState(() =>({
-                success: "Account closed"
-            }))
+
+            // delete transactions
+            TransactionService.getAllAccountTransactions(id).then((response) => {
+
+                response.data.map((transaction, index) => (
+                    TransactionService.deleteTransaction(transaction.id).then(() => {
+                        
+                        this.setState(() =>({
+                            success: "Account closed"
+                        }))
+
+                        // reload accounts
+                        AccountService.getUserAccounts(this.state.user.id).then((response) => {
+                            this.setState(() => ({
+                                userAccounts: response.data
+                            }));
+                        });
+
+
+                    })
+
+                ))
+            })
         })
         .catch((error) => {
             this.setState(() =>({
