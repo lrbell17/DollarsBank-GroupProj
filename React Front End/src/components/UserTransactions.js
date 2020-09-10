@@ -100,11 +100,18 @@ class UserTransactions extends React.Component {
                 </table>
 
                 <hr/>
-                <Link  to='/home'>
-                        Return  
+                
+                <Link to={{
+                        pathname: "/home",
+                        state: {
+                            activeUser: this.props.activeUser,
+                            isLoggedIn: this.props.isLoggedIn
+                        }
+                    }}>
+                        <li className="nav-items">Home</li>
                 </Link>
 
-                </div>
+            </div>
         )
     }
 }

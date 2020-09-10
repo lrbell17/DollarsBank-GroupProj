@@ -91,13 +91,15 @@ class Login extends React.Component {
 
                         <label>Username</label><br/>
                         <input type="text" value={this.state.uname} 
-                            onChange={evt => this.setState({uname : evt.target.value })} placeholder="Username"  
+                            onChange={evt => this.setState({uname : evt.target.value, error:"", success: ""})} 
+                            placeholder="Username"  
                         /><br/><br/>
 
 
                         <label>Password</label><br/>
                         <input type="password" value={this.state.lname} 
-                            onChange={evt => this.setState({pass : evt.target.value })} placeholder="Password"
+                            onChange={evt => this.setState({pass : evt.target.value, error:"", success: ""})} 
+                            placeholder="Password"
                         /><br/><br/>
 
                         <input type="submit" />

@@ -175,7 +175,8 @@ class Transaction extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     
                     <strong>Account No:    </strong>
-                    <select value={this.state.accountNo} onChange={evt => this.setState({accountNo : evt.target.value })}>
+                    <select value={this.state.accountNo} onChange={evt => this.setState({accountNo : evt.target.value
+                        , error:"", success: ""  })}>
                         
                         {
                         userAccounts.sort().map((account, index) => (
@@ -191,24 +192,24 @@ class Transaction extends React.Component {
                     <strong>Transaction Type:</strong><br/> 
                         <input type="radio" id="deposit" name="transType" value="deposit" 
                             checked={this.state.transactionType === 'deposit'} 
-                            onChange={evt => this.setState({transactionType : evt.target.value })} />
+                            onChange={evt => this.setState({transactionType : evt.target.value, error:"", success: ""  })} />
                         <label for="deposit">Deposit</label><br/>
 
                         <input type="radio" id="withdraw" name="transType" value="withdraw" 
                             checked={this.state.transactionType === 'withdraw'}
-                            onChange={evt => this.setState({transactionType : evt.target.value })} />
+                            onChange={evt => this.setState({transactionType : evt.target.value, error:"", success: ""})} />
                         <label for="withdraw">Withdraw</label><br/>
 
                         <input type="radio" id="transfer" name="transType" value="transfer"
                             checked={this.state.transactionType === 'transfer'}
-                            onChange={evt => this.setState({transactionType : evt.target.value })} />
+                            onChange={evt => this.setState({transactionType : evt.target.value, error:"", success: ""})} />
                         <label for="transfer">Transfer</label>
                     <br/>
 
 
                     <strong>Amount: </strong><br/>
                     <input type="number" value={this.state.amount} 
-                            onChange={evt => this.setState({amount : evt.target.value })} placeholder="$0.00"
+                            onChange={evt => this.setState({amount : evt.target.value, error:"", success: ""})} placeholder="$0.00"
                             min="0.01" step="0.01" required
                     /><br/>
                     
@@ -218,7 +219,7 @@ class Transaction extends React.Component {
                     <div>
                         <strong>Account No of recipient: </strong><br/>
                         <input type="number" value={this.state.accountForTransfer} 
-                                onChange={evt => this.setState({accountForTransfer : evt.target.value })} 
+                                onChange={evt => this.setState({accountForTransfer : evt.target.value, error:"", success: ""})} 
                                 placeholder="Account Number" required/>
                         <br/>
                     </div>
@@ -232,8 +233,15 @@ class Transaction extends React.Component {
                 </form>
 
                 <br></br>
-                <Link  to='/home'>
-                        Return  
+                
+                <Link to={{
+                        pathname: "/home",
+                        state: {
+                            activeUser: this.props.activeUser,
+                            isLoggedIn: this.props.isLoggedIn
+                        }
+                    }}>
+                        <li className="nav-items">Home</li>
                 </Link>
                 
                 

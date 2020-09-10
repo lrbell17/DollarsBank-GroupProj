@@ -89,30 +89,30 @@ class Update extends React.Component {
                     
                     <label>First Name</label><br/>
                         <input type="text" value={this.state.fname} 
-                            onChange={evt => this.setState({fname : evt.target.value })} placeholder={"First Name"}
+                            onChange={evt => this.setState({fname : evt.target.value, error:"", success:"" })} placeholder={"First Name"}
                         required /> <br/><br/>
 
                         <label>Last Name</label><br/>
                         <input type="text" value={this.state.lname} 
-                            onChange={evt => this.setState({lname : evt.target.value })} placeholder="Last Name"  
+                            onChange={evt => this.setState({lname : evt.target.value, error:"", success:"" })} placeholder="Last Name"  
                             required 
                         /><br/><br/>
 
                         <label>Username</label><br/>
                         <input type="text" value={this.state.uname} 
-                            onChange={evt => this.setState({uname : evt.target.value })} placeholder="Username"  
+                            onChange={evt => this.setState({uname : evt.target.value, error:"", success: "" })} placeholder="Username"  
                             required 
                         /><br/><br/>
 
                         <label>Email</label><br/>
                         <input type="email" value={this.state.email} 
-                            onChange={evt => this.setState({email : evt.target.value })} placeholder="Email" 
+                            onChange={evt => this.setState({email : evt.target.value, error:"", success: ""  })} placeholder="Email" 
                             required 
                         /><br/><br/>
 
                         <label>Password</label><br/>
                         <input type="password" value={this.state.pass} 
-                            onChange={evt => this.setState({pass : evt.target.value })} placeholder="Password" 
+                            onChange={evt => this.setState({pass : evt.target.value, error:"", success: ""  })} placeholder="Password" 
                             required 
                         /><br/><br/>
 
@@ -120,8 +120,15 @@ class Update extends React.Component {
                 </form>
 
                 <br></br>
-                <Link  to='/home'>
-                        Return  
+                
+                <Link to={{
+                        pathname: "/home",
+                        state: {
+                            activeUser: this.props.activeUser,
+                            isLoggedIn: this.props.isLoggedIn
+                        }
+                    }}>
+                        <li className="nav-items">Home</li>
                 </Link>
 
             </div>

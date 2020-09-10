@@ -58,7 +58,7 @@ class Account extends HomePage {
 
                         <label>Initial Deposit</label><br/>
                         <input type="number" value={this.state.initialDeposit} 
-                            onChange={evt => this.setState({initialDeposit : evt.target.value })} 
+                            onChange={evt => this.setState({initialDeposit : evt.target.value, error:"", success: ""})} 
                             min="0.00" step="0.01" placeholder="$0.00"  required
                         /><br/><br/>
 
@@ -68,8 +68,15 @@ class Account extends HomePage {
                 
 
                 <br></br>
-                <Link  to='/home'>
-                        Return  
+                
+                <Link to={{
+                        pathname: "/home",
+                        state: {
+                            activeUser: this.props.activeUser,
+                            isLoggedIn: this.props.isLoggedIn
+                        }
+                    }}>
+                        <li className="nav-items">Home</li>
                 </Link>
 
             </div>
