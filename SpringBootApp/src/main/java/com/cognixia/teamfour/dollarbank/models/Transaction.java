@@ -57,7 +57,7 @@ public class Transaction {
 	public Transaction(int id, String type, int userId, int accountId, float amount, float startBalance,
 			float endBalance, String timeStamp) {
 		super();
-		SimpleDateFormat df = new SimpleDateFormat("d/M/yyyy H:m:s aa");
+		SimpleDateFormat df = new SimpleDateFormat("M/d/yyyy H:m:s aa");
 		this.id = id;
 		this.type = type;
 		this.userId = userId;

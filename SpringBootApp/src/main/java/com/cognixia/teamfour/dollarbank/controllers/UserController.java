@@ -60,7 +60,7 @@ public class UserController {
 		a.setBalance(amount);
 		as.create(a);
 		
-		SimpleDateFormat df = new SimpleDateFormat("d/M/yyyy H:m:s aa");
+		SimpleDateFormat df = new SimpleDateFormat("M/d/yyyy HH:mm:ss aa");
 		String timeStamp = df.format(new Date());
 		
 		Transaction t = new Transaction();
