@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import AccountService from '../services/AccountService.js';
 import NavBar from './NavBar';
 import TransactionService from '../services/TransactionService.js';
@@ -26,10 +26,6 @@ class Transaction extends React.Component {
     }
 
     componentDidMount = () => {
-
-        if (!this.props.location.state || this.state.isLoggedIn===false){
-            return <Redirect to="/login" />
-        }
   
         if (this.props.location.state !== undefined){
                 
@@ -235,6 +231,10 @@ class Transaction extends React.Component {
                     <input type="submit" />
                 </form>
 
+                <br></br>
+                <Link  to='/home'>
+                        Return  
+                </Link>
                 
                 
             </div>

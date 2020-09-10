@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import LoginRegistrationService from '../services/LoginRegesterService.js';
+import LoginRegistrationService from '../services/LoginRegisterService.js';
 
 
 class Login extends React.Component {

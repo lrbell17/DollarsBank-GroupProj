@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from './Login';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import NavBar from './NavBar';
 import TransactionService from '../services/TransactionService.js';
 
@@ -21,8 +21,6 @@ class UserTransactions extends React.Component {
     componentDidMount = () => {
   
         if (this.props.location.state !== undefined){
-            console.log(this.props.location.state.isLoggedIn);
-            console.log(this.props.location.state.activeUser.id);
             
             const activeUser = this.props.location.state.activeUser;
 
@@ -102,6 +100,11 @@ class UserTransactions extends React.Component {
                         }
                     </tbody>
                 </table>
+
+                <hr/>
+                <Link  to='/home'>
+                        Return  
+                </Link>
 
                 </div>
         )

@@ -61,6 +61,12 @@ class Account extends HomePage {
                 </form>
 
                 <button onClick={() => {this.handleSubmit()}}>Submit</button>
+
+                <br></br>
+                <Link  to='/home'>
+                        Return  
+                </Link>
+                
             </div>
         );
     }

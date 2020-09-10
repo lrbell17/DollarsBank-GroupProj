@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import LoginRegisterService from '../services/LoginRegesterService';
+import LoginRegistrationService from '../services/LoginRegisterService.js';
 import NavBar from './NavBar';
+
 
 class Update extends React.Component {
 
@@ -22,30 +23,52 @@ class Update extends React.Component {
     }
 
     componentDidMount = () => {
-  
-        if (this.props.location.state !== undefined){   
  
-            const activeUser = this.props.location.state.activeUser;
-            this.state.fname = activeUser.fname;
+        if (this.props.location.state !== undefined){   
 
             this.setState(() => ({
                 user: this.props.location.state.activeUser,
                 isLoggedIn: this.props.location.state.isLoggedIn
             }))
 
-            LoginRegisterService.getUser(activeUser.uname, activeUser.password).then((response) => {
-                this.setState(() => ({
-                    user: response.data
-                }));
-            });
         }
     }
 
     handleSubmit =(e) => {
-        //ToDo
+        e.preventDefault();
+
+        this.setState(() => ({
+            success: "",
+            error: ""
+        }));
+
+        let user = this.state.user;
+
+        LoginRegistrationService.updateUser(this.props.location.state.activeUser.id, this.state.fname, this.state.lname,
+            this.state.uname, this.state.email, this.state.pass)
+        .then(() => {
+            user.firstName = this.state.fname;
+            user.lastName = this.state.lname;
+            user.userName = this.state.uname;
+            user.password = this.state.pass;
+            this.setState(() => ({
+                success: "User information updated sucessfully",
+                user: user
+            }))
+        }).catch((e) => {
+            this.setState(() => ({
+                error: "Unable to update user information"
+            }))
+        });
     }
 
     render() {
+
+        // checks if user is logged in
+        if (!this.props.location.state || this.state.isLoggedIn===false){
+            return <Redirect to="/login" />
+        }
+
         const errorStyle = {
             color: 'red'
         }
@@ -58,10 +81,8 @@ class Update extends React.Component {
                 <NavBar activeUser={this.state.user} isLoggedIn={this.state.isLoggedIn}/>
                 <h1>Update User Info</h1>
 
-                {/* print success message */}
+                {/* print success/error message */}
                 <p style={sucessStyle}>{this.state.success}</p>
-                    
-                {/* print error message */}
                 <p style={errorStyle}>{this.state.error}</p>
 
                 <form onSubmit={this.handleSubmit}>
@@ -100,7 +121,7 @@ class Update extends React.Component {
 
                 <br></br>
                 <Link  to='/home'>
-                        Return
+                        Return  
                 </Link>
 
             </div>
